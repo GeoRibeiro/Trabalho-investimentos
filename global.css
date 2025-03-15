@@ -1,0 +1,92 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    background: var(--bege);
+}
+
+:root{
+    --amarilo: #ffcd5d;
+    --bege:#2c2b28;
+    --white: #FEFEFE;
+    --new-amarilo: #f7dfaa;
+    --wine: #8e0b03;
+}
+
+.nav-lista{
+    font-family: "Public Sans", serif;
+    font-weight: 800;
+    list-style: none;
+    display: flex;
+    list-style-type: none;
+    margin: 1.063rem;
+}
+
+.cadastrar{
+    display: flex;
+    gap: 1.875rem;
+    align-items: center;
+}
+
+.cadastrar li {
+    list-style-type: none;
+}
+
+.cadastrar li:first-child {
+    padding: 0.3rem 0;
+    margin-left: 16.063rem;
+}
+
+.cadastrar li:last-child {
+    border: 2px solid var(--amarilo);
+    padding: 0.3rem 0.8rem;
+    transition: all 0.3s ease;
+    font-style: italic;
+}
+/*
+Prefere a cor do cadastrar new-amarilo ou branco igual o desing?
+*/
+.cadastrar li:last-child a {
+    color: var(--amarilo);
+}
+
+.ancoras a:hover,
+.ancoras a:focus{
+    color: var(--amarilo);
+    transition-duration: 0.2s;
+    text-decoration: underline;
+}
+
+/*
+.cadastrar li:last-child:hover {
+    background: var(--amarilo);
+}
+
+.cadastrar li:last-child:hover a {
+    color: var(--bege);
+}
+*/
+.piggybank-icon{
+    height: 3.125rem;
+    width: 3.125rem;
+    margin-right: 0.313rem;
+}
+
+.ancoras{
+    display: flex;
+    list-style-type: none;
+    gap: 3.125rem;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+a{    
+    text-decoration: none;
+    color: var(--white);
+    font-size: 1.05rem;
+}
+
+h1, p{
+    color: var(--white);
+}
