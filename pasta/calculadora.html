@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Renda Fixa x Renda Variavel</title>
+    <title>Calculadora de Investimentos</title>
     <link rel="stylesheet" href="./pasta de css/calculadora.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,6 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
 </head>
 <body>
     <header>
@@ -32,7 +33,552 @@
         </nav>
     </header>
 
-    
-    
+    <main class="calculadora-container">
+        <div class="calculator-title">
+            <h1>Calculadora de Investimentos</h1>
+            <p>Descubra o potencial dos seus investimentos com nossa calculadora interativa.</p>
+            <div class="calculator-subtitle">
+                <span class="calc-type">Ideal para Renda Fixa</span>
+                <span class="info-icon" data-tooltip="Esta calculadora é especializada para investimentos de renda fixa, como CDBs, Tesouro Direto, LCIs, LCAs e outros títulos com rentabilidade preestabelecida. Para renda variável, os resultados podem divergir devido à volatilidade do mercado.">i</span>
+            </div>
+        </div>
+
+        <div class="calculator-wrapper">
+            <div class="calculator-input">
+                <h2>Calculadora de Rendimentos</h2>
+                <p>Use nossa calculadora para estimar quanto seu dinheiro pode render.</p>
+
+                <div class="input-group">
+                    <label for="valor-inicial">Valor inicial <span class="info-icon" data-tooltip="Quantidade inicial de dinheiro que você investirá de uma vez.">i</span></label>
+                    <div class="input-wrapper">
+                        <span class="currency-symbol">R$</span>
+                        <input type="text" id="valor-inicial" value="100" />
+                    </div>
+                    <div class="slider-container">
+                        <input type="range" min="100" max="100000" value="100" class="slider" id="valor-inicial-slider">
+                        <div class="slider-thumb" id="valor-inicial-thumb"></div>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="aporte-mensal">Aporte mensal <span class="info-icon" data-tooltip="Valor que você planeja adicionar ao investimento mensalmente.">i</span></label>
+                    <div class="input-wrapper">
+                        <span class="currency-symbol">R$</span>
+                        <input type="text" id="aporte-mensal" value="0" />
+                    </div>
+                    <div class="slider-container">
+                        <input type="range" min="0" max="10000" value="0" class="slider" id="aporte-mensal-slider">
+                        <div class="slider-thumb" id="aporte-mensal-thumb"></div>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="periodo">Período em anos <span class="info-icon" data-tooltip="Tempo que você pretende manter o investimento. Quanto maior o tempo, maior o potencial de rendimento.">i</span></label>
+                    <div class="period-options">
+                        <button class="period-option active">5</button>
+                        <button class="period-option">10</button>
+                        <button class="period-option">15</button>
+                        <button class="period-option">20</button>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="taxa-juros">
+                        <span id="taxa-juros-label">Taxa de juros</span> 
+                        <span class="info-icon" data-tooltip="Taxa de juros do investimento. Você pode escolher entre visualizar ao ano ou ao mês.">i</span>
+                    </label>
+                    
+                    <div class="toggle-container">
+                        <span class="toggle-label active" id="taxa-anual">Anual</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="taxa-tipo-toggle">
+                            <span class="toggle-slider"></span>
+                        </label>
+                        <span class="toggle-label" id="taxa-mensal">Mensal</span>
+                    </div>
+                    
+                    <div class="input-wrapper percent">
+                        <input type="text" id="taxa-juros" value="1.0" />
+                        <span class="percent-symbol">%</span>
+                    </div>
+                    <div class="slider-container">
+                        <input type="range" min="1" max="20" step="0.1" value="1.0" class="slider" id="taxa-juros-slider">
+                        <div class="slider-thumb" id="taxa-juros-thumb"></div>
+                    </div>
+                </div>
+
+                <button class="calculate-button">Calcular</button>
+            </div>
+
+            <div class="calculator-result">
+                <h2>Resultado do Investimento</h2>
+                <p>Como seu dinheiro pode crescer ao longo do tempo?</p>
+
+                <div class="result-display">
+                    <div class="total-amount">
+                        <span class="amount">R$ 0,00</span>
+                        <span class="description">Valor Total</span>
+                    </div>
+
+                    <div class="chart-container">
+                        <div class="donut-chart">
+                            <div class="chart-center">
+                                <span class="monthly-result">R$ 0,00</span>
+                                <span class="result-label">Valor Final</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="breakdown">
+                        <div class="breakdown-item">
+                            <span class="breakdown-color principal"></span>
+                            <span class="breakdown-label">Valor investido</span>
+                            <span class="breakdown-value">R$ 0,00</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span class="breakdown-color interest"></span>
+                            <span class="breakdown-label">Rendimento</span>
+                            <span class="breakdown-value">R$ 0,00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="calculation-explanation">
+                    <h3>Como calculamos?</h3>
+                    <p>Utilizamos a fórmula de juros compostos aplicada mensalmente:</p>
+                    <div class="formula">
+                        <span class="formula-text">VF = VI × (1 + i)<sup>n</sup> + AM × [(1 + i)<sup>n</sup> - 1] ÷ i</span>
+                    </div>
+                    <div class="formula-legend">
+                        <span><strong>VF</strong>: Valor Final</span>
+                        <span><strong>VI</strong>: Valor Inicial</span>
+                        <span><strong>i</strong>: Taxa de juros (<span id="taxa-tipo-texto">anual ÷ 12</span>)</span>
+                        <span><strong>AM</strong>: Aporte Mensal</span>
+                        <span><strong>n</strong>: Número total de meses</span>
+                    </div>
+                </div>
+
+                <button class="recalculate-button">Recalcular</button>
+                <div class="creator-text">Feito por Nicklink</div>
+                
+                <div class="share-container">
+                    <h3>Compartilhar resultado</h3>
+                    <div class="share-buttons">
+                        <button class="share-button whatsapp" id="share-whatsapp">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.2-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/></svg>
+                            WhatsApp
+                        </button>
+                        <button class="share-button pdf" id="generate-pdf">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"/></svg>
+                            Gerar PDF
+                        </button>
+                        <button class="share-button copy-link" id="copy-result">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                            Copiar
+                        </button>
+                    </div>
+                    <div id="copy-success" class="copy-message">Resultado copiado!</div>
+                    <div id="pdf-success" class="copy-message">PDF gerado com sucesso!</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const valorInicialInput = document.getElementById('valor-inicial');
+            const valorInicialSlider = document.getElementById('valor-inicial-slider');
+            const valorInicialThumb = document.getElementById('valor-inicial-thumb');
+            
+            const aporteMensalInput = document.getElementById('aporte-mensal');
+            const aporteMensalSlider = document.getElementById('aporte-mensal-slider');
+            const aporteMensalThumb = document.getElementById('aporte-mensal-thumb');
+            
+            const taxaJurosInput = document.getElementById('taxa-juros');
+            const taxaJurosSlider = document.getElementById('taxa-juros-slider');
+            const taxaJurosThumb = document.getElementById('taxa-juros-thumb');
+            
+            const periodButtons = document.querySelectorAll('.period-option');
+            
+            const taxaTipoToggle = document.getElementById('taxa-tipo-toggle');
+            const taxaAnualLabel = document.getElementById('taxa-anual');
+            const taxaMensalLabel = document.getElementById('taxa-mensal');
+            let isAnual = true;
+            
+            function formatCurrency(value) {
+                return new Intl.NumberFormat('pt-BR', { 
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2 
+                }).format(value);
+            }
+            
+            function updateSliderThumb(slider, thumb) {
+                const min = parseFloat(slider.min);
+                const max = parseFloat(slider.max);
+                const val = parseFloat(slider.value);
+                const percent = ((val - min) / (max - min)) * 100;
+                
+                requestAnimationFrame(() => {
+                    thumb.style.left = `${percent}%`;
+                });
+            }
+
+            function updateAllThumbs() {
+                updateSliderThumb(valorInicialSlider, valorInicialThumb);
+                updateSliderThumb(aporteMensalSlider, aporteMensalThumb);
+                updateSliderThumb(taxaJurosSlider, taxaJurosThumb);
+            }
+            
+            valorInicialSlider.addEventListener('input', function() {
+                valorInicialInput.value = valorInicialSlider.value;
+                updateSliderThumb(valorInicialSlider, valorInicialThumb);
+            });
+
+            valorInicialSlider.addEventListener('change', function() {
+                updateSliderThumb(valorInicialSlider, valorInicialThumb);
+            });
+            
+            valorInicialInput.addEventListener('input', function() {
+                let value = valorInicialInput.value.replace(/[^\d]/g, '');
+                value = parseInt(value) || 100;
+                value = Math.min(Math.max(value, 100), 100000);
+                valorInicialSlider.value = value;
+                updateSliderThumb(valorInicialSlider, valorInicialThumb);
+            });
+            
+            valorInicialInput.addEventListener('blur', function() {
+                valorInicialInput.value = valorInicialSlider.value;
+            });
+            
+            aporteMensalSlider.addEventListener('input', function() {
+                aporteMensalInput.value = aporteMensalSlider.value;
+                updateSliderThumb(aporteMensalSlider, aporteMensalThumb);
+            });
+
+            aporteMensalSlider.addEventListener('change', function() {
+                updateSliderThumb(aporteMensalSlider, aporteMensalThumb);
+            });
+            
+            aporteMensalInput.addEventListener('input', function() {
+                let value = aporteMensalInput.value.replace(/[^\d]/g, '');
+                value = parseInt(value) || 0;
+                value = Math.min(Math.max(value, 0), 10000);
+                aporteMensalSlider.value = value;
+                updateSliderThumb(aporteMensalSlider, aporteMensalThumb);
+            });
+            
+            aporteMensalInput.addEventListener('blur', function() {
+                aporteMensalInput.value = aporteMensalSlider.value;
+            });
+            
+            taxaJurosSlider.addEventListener('input', function() {
+                const casasDecimais = isAnual ? 1 : 2;
+                taxaJurosInput.value = parseFloat(taxaJurosSlider.value).toFixed(casasDecimais);
+                updateSliderThumb(taxaJurosSlider, taxaJurosThumb);
+            });
+
+            taxaJurosSlider.addEventListener('change', function() {
+                updateSliderThumb(taxaJurosSlider, taxaJurosThumb);
+            });
+            
+            taxaJurosInput.addEventListener('input', function() {
+                let value = taxaJurosInput.value.replace(/[^\d.]/g, '');
+                value = parseFloat(value) || (isAnual ? 1 : 0.1);
+                
+                const minValue = isAnual ? 1 : 0.1;
+                const maxValue = isAnual ? 20 : 2;
+                
+                value = Math.min(Math.max(value, minValue), maxValue);
+                taxaJurosSlider.value = value;
+                updateSliderThumb(taxaJurosSlider, taxaJurosThumb);
+            });
+            
+            taxaJurosInput.addEventListener('blur', function() {
+                const casasDecimais = isAnual ? 1 : 2;
+                taxaJurosInput.value = parseFloat(taxaJurosSlider.value).toFixed(casasDecimais);
+            });
+            
+            periodButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    periodButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+            
+            taxaTipoToggle.addEventListener('change', function() {
+                isAnual = !taxaTipoToggle.checked;
+                
+                if (isAnual) {
+                    taxaAnualLabel.classList.add('active');
+                    taxaMensalLabel.classList.remove('active');
+                    taxaJurosInput.value = (parseFloat(taxaJurosInput.value) * 12).toFixed(1);
+                    taxaJurosSlider.min = 1;
+                    taxaJurosSlider.max = 20;
+                    taxaJurosSlider.step = 0.1;
+                    const valorAnual = Math.min(Math.max(parseFloat(taxaJurosInput.value), 1), 20);
+                    taxaJurosInput.value = valorAnual.toFixed(1);
+                    taxaJurosSlider.value = valorAnual;
+                } else {
+                    taxaAnualLabel.classList.remove('active');
+                    taxaMensalLabel.classList.add('active');
+                    const valorMensal = parseFloat(taxaJurosInput.value) / 12;
+                    taxaJurosSlider.min = 0.1;
+                    taxaJurosSlider.max = 2;
+                    taxaJurosSlider.step = 0.01;
+                    const valorAjustado = Math.min(Math.max(valorMensal, 0.1), 2);
+                    taxaJurosInput.value = valorAjustado.toFixed(2);
+                    taxaJurosSlider.value = valorAjustado;
+                }
+                
+                updateSliderThumb(taxaJurosSlider, taxaJurosThumb);
+
+                document.getElementById('taxa-tipo-texto').textContent = isAnual ? "anual ÷ 12" : "mensal";
+            });
+            
+            function initChart() {
+                document.querySelector('.donut-chart').style.background = 
+                    `conic-gradient(var(--wine) 0% 100%, var(--amarilo) 100% 100%)`;
+            }
+            
+            function calcularRendimento() {
+                const valorInicial = parseInt(valorInicialInput.value);
+                const aporteMensal = parseInt(aporteMensalInput.value);
+                const taxaJurosValue = parseFloat(taxaJurosInput.value) / 100;
+                const periodo = parseInt(document.querySelector('.period-option.active').textContent);
+                
+                const taxaJuros = isAnual ? taxaJurosValue / 12 : taxaJurosValue;
+                
+                let valorTotal = valorInicial;
+                let totalInvestido = valorInicial;
+                
+                for (let i = 0; i < periodo * 12; i++) {
+                    valorTotal = valorTotal * (1 + taxaJuros) + aporteMensal;
+                    totalInvestido += aporteMensal;
+                }
+                
+                const rendimento = valorTotal - totalInvestido;
+                
+                document.querySelector('.total-amount .amount').textContent = 'R$ ' + formatCurrency(valorTotal);
+                document.querySelector('.monthly-result').textContent = 'R$ ' + formatCurrency(valorTotal);
+                document.querySelector('.breakdown-item:nth-child(1) .breakdown-value').textContent = 'R$ ' + formatCurrency(totalInvestido);
+                document.querySelector('.breakdown-item:nth-child(2) .breakdown-value').textContent = 'R$ ' + formatCurrency(rendimento);
+                
+                let principal = Math.round((totalInvestido / valorTotal) * 100);
+                let interest = 100 - principal;
+
+                if (interest < 5 && interest > 0) {
+                    principal = 95;
+                    interest = 5;
+                }
+                
+                document.querySelector('.donut-chart').style.background = 
+                    `conic-gradient(var(--wine) 0% ${principal}%, var(--amarilo) ${principal}% 100%)`;
+            }
+            
+            document.querySelector('.calculate-button').addEventListener('click', function() {
+                calcularRendimento();
+                
+                const creatorText = document.querySelector('.creator-text');
+                creatorText.style.opacity = '1';
+                
+                setTimeout(function() {
+                    creatorText.style.opacity = '0';
+                }, 5000);
+            });
+            
+            document.querySelector('.recalculate-button').addEventListener('click', function() {
+                calcularRendimento();
+                
+                const creatorText = document.querySelector('.creator-text');
+                creatorText.style.opacity = '1';
+                
+                setTimeout(function() {
+                    creatorText.style.opacity = '0';
+                }, 5000);
+            });
+            
+            updateAllThumbs();
+            initChart();
+
+            window.addEventListener('resize', updateAllThumbs);
+
+            function prepareShareText() {
+                const valorInicial = document.getElementById('valor-inicial').value;
+                const aporteMensal = document.getElementById('aporte-mensal').value;
+                const taxaJuros = document.getElementById('taxa-juros').value;
+                const tipoTaxa = document.getElementById('taxa-tipo-toggle').checked ? 'mensal' : 'anual';
+                const periodo = document.querySelector('.period-option.active').textContent;
+                
+                const valorFinal = document.querySelector('.monthly-result').textContent;
+                const valorInvestido = document.querySelector('.breakdown-item:nth-child(1) .breakdown-value').textContent;
+                const rendimento = document.querySelector('.breakdown-item:nth-child(2) .breakdown-value').textContent;
+                
+                return {
+                    text: `Simulação de Investimento - Money Talks\n\n` +
+                       `Valor inicial: R$ ${valorInicial}\n` +
+                       `Aporte mensal: R$ ${aporteMensal}\n` +
+                       `Taxa de juros: ${taxaJuros}% ${tipoTaxa}\n` +
+                       `Período: ${periodo} anos\n\n` +
+                       `Resultados:\n` +
+                       `- Valor final: ${valorFinal}\n` +
+                       `- Valor investido: ${valorInvestido}\n` +
+                       `- Rendimento: ${rendimento}\n\n` +
+                       `Faça sua simulação em: money-talks.com.br/calculadora`,
+                    dados: {
+                        valorInicial,
+                        aporteMensal,
+                        taxaJuros,
+                        tipoTaxa,
+                        periodo,
+                        valorFinal,
+                        valorInvestido,
+                        rendimento,
+                        percentualPrincipal: Math.round((parseFloat(valorInvestido.replace(/[^\d,]/g, '').replace(',', '.')) / parseFloat(valorFinal.replace(/[^\d,]/g, '').replace(',', '.'))) * 100),
+                        percentualRendimento: 100 - Math.round((parseFloat(valorInvestido.replace(/[^\d,]/g, '').replace(',', '.')) / parseFloat(valorFinal.replace(/[^\d,]/g, '').replace(',', '.'))) * 100)
+                    }
+                };
+            }
+            
+            document.getElementById('share-whatsapp').addEventListener('click', function() {
+                const text = encodeURIComponent(prepareShareText().text);
+                window.open(`https://wa.me/?text=${text}`, '_blank');
+            });
+            
+            document.getElementById('copy-result').addEventListener('click', function() {
+                const text = prepareShareText().text;
+                navigator.clipboard.writeText(text).then(function() {
+                    const copySuccess = document.getElementById('copy-success');
+                    copySuccess.style.opacity = '1';
+                    setTimeout(function() {
+                        copySuccess.style.opacity = '0';
+                    }, 2000);
+                });
+            });
+            
+            document.getElementById('generate-pdf').addEventListener('click', function() {
+                try {
+                    let doc;
+                    if (window.jspdf && window.jspdf.jsPDF) {
+                        doc = new window.jspdf.jsPDF({
+                            orientation: 'portrait',
+                            unit: 'mm',
+                            format: 'a4'
+                        });
+                    } else if (window.jsPDF) {
+                        doc = new window.jsPDF({
+                            orientation: 'portrait',
+                            unit: 'mm',
+                            format: 'a4'
+                        });
+                    } else {
+                        throw new Error("Biblioteca jsPDF não encontrada");
+                    }
+                    
+                    const dados = prepareShareText().dados;
+                    
+                    const valorFinalLimpo = dados.valorFinal.replace('R$ ', '');
+                    const valorInvestidoLimpo = dados.valorInvestido.replace('R$ ', '');
+                    const rendimentoLimpo = dados.rendimento.replace('R$ ', '');
+                    
+                    const corFundo = '#2b2b2b';
+                    const corTitulo = '#C75000';  // equivalente a --wine
+                    const corDestaque = '#FFCD5D'; // equivalente a --amarilo
+                    
+
+                    doc.setFillColor(corFundo);
+                    doc.rect(0, 0, 210, 10, 'F');
+                    
+                    doc.setFillColor(corDestaque);
+                    doc.rect(0, 0, 5, 297, 'F');
+                    doc.rect(205, 0, 5, 297, 'F');
+                    
+                    doc.setFontSize(28);
+                    doc.setTextColor(corTitulo);
+                    doc.setFont('helvetica', 'bold');
+                    doc.text('Simulação de Investimento', 105, 30, {align: 'center'});
+                    
+                    doc.setFontSize(16);
+                    doc.setTextColor(corDestaque);
+                    doc.text('Money Talks', 105, 40, {align: 'center'});
+                    
+                    doc.setDrawColor(corDestaque);
+                    doc.setLineWidth(1);
+                    doc.line(20, 45, 190, 45);
+                    
+                    doc.setFillColor(corFundo);
+                    doc.roundedRect(20, 55, 170, 55, 3, 3, 'F');
+                    
+                    doc.setFontSize(18);
+                    doc.setTextColor(corDestaque);
+                    doc.setFont('helvetica', 'bold');
+                    doc.text('Parâmetros da Simulação', 35, 68);
+                    
+                    doc.setFontSize(12);
+                    doc.setTextColor(255, 255, 255);
+                    doc.setFont('helvetica', 'normal');
+                    doc.text(`Valor inicial: R$ ${dados.valorInicial}`, 35, 80);
+                    doc.text(`Aporte mensal: R$ ${dados.aporteMensal}`, 35, 90);
+                    doc.text(`Taxa de juros: ${dados.taxaJuros}% ${dados.tipoTaxa}`, 35, 100);
+                    doc.text(`Período: ${dados.periodo} anos`, 150, 80);
+                    
+                    doc.setFillColor(corFundo);
+                    doc.roundedRect(20, 120, 170, 100, 3, 3, 'F');
+                    
+                    doc.setFontSize(18);
+                    doc.setTextColor(corDestaque);
+                    doc.setFont('helvetica', 'bold');
+                    doc.text('Resultados', 35, 133);
+                    
+
+                    doc.setFillColor(corTitulo);
+                    doc.roundedRect(40, 145, 130, 25, 3, 3, 'F');
+                    
+                    doc.setFontSize(20);
+                    doc.setTextColor(255, 255, 255);
+                    doc.setFont('helvetica', 'bold');
+                    doc.text(`Valor Final: R$ ${valorFinalLimpo}`, 105, 162, {align: 'center'});
+                    
+                    doc.setFontSize(12);
+                    doc.setTextColor(255, 255, 255);
+                    doc.setFont('helvetica', 'normal');
+                    doc.text(`Valor investido: R$ ${valorInvestidoLimpo}`, 35, 185);
+                    doc.text(`Rendimento: R$ ${rendimentoLimpo}`, 35, 195);
+                    
+
+                    doc.setFillColor(corFundo);
+                    doc.rect(0, 277, 210, 20, 'F');
+                    
+                    doc.setFontSize(10);
+                    doc.setTextColor(255, 255, 255);
+                    doc.text('Simulação gerada em ' + new Date().toLocaleDateString('pt-BR'), 20, 290);
+                    doc.text('money-talks.com.br/calculadora', 190, 290, {align: 'right'});
+                    
+
+                    doc.save('simulacao-investimento.pdf');
+                    
+                    const pdfSuccess = document.getElementById('pdf-success');
+                    pdfSuccess.style.opacity = '1';
+                    setTimeout(function() {
+                        pdfSuccess.style.opacity = '0';
+                    }, 2000);
+                } catch (error) {
+                    console.error("Erro ao gerar PDF:", error);
+                    
+                    const pdfSuccess = document.getElementById('pdf-success');
+                    pdfSuccess.textContent = "Erro ao gerar PDF. Veja o console para detalhes.";
+                    pdfSuccess.style.color = "#ff5252";
+                    pdfSuccess.style.opacity = '1';
+                    setTimeout(function() {
+                        pdfSuccess.style.opacity = '0';
+                        pdfSuccess.textContent = "PDF gerado com sucesso!";
+                        pdfSuccess.style.color = "var(--amarilo)";
+                    }, 3000);
+                    
+                    alert("Não foi possível gerar o PDF. Os resultados serão copiados para a área de transferência.");
+                    navigator.clipboard.writeText(prepareShareText().text);
+                }
+            });
+        });
+    </script>
 </body>
 </html>

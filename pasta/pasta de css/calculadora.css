@@ -1,1 +1,715 @@
 @import "/global.css";
+
+.calculadora-container {
+    max-width: 1200px;
+    margin: 60px auto;
+    padding: 0 20px;
+}
+
+.calculator-title {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.calculator-title h1 {
+    font-family: "Abril Fatface";
+    font-size: 3.5rem;
+    color: var(--amarilo);
+    margin-bottom: 15px;
+}
+
+.calculator-title p {
+    font-family: "Public Sans";
+    font-size: 1.2rem;
+    color: var(--white);
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.calculator-wrapper {
+    display: flex;
+    gap: 40px;
+    background: var(--bege);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.calculator-input, .calculator-result {
+    flex: 1;
+    padding: 30px;
+    border-radius: 15px;
+}
+
+.calculator-input {
+    background: var(--bege);
+    border: 2px solid var(--amarilo);
+    border-radius: 15px;
+}
+
+.calculator-result {
+    background: var(--bege);
+    border: 2px solid var(--wine);
+    border-radius: 15px;
+}
+
+.calculator-input h2, .calculator-result h2 {
+    font-family: "Abril Fatface";
+    font-size: 2rem;
+    color: var(--amarilo);
+    margin-bottom: 10px;
+    background: transparent;
+}
+
+.calculator-input p, .calculator-result p {
+    font-family: "Public Sans";
+    font-size: 1rem;
+    color: var(--white);
+    margin-bottom: 30px;
+    background: transparent;
+}
+
+.input-group {
+    margin-bottom: 25px;
+    background: transparent;
+}
+
+.input-group label {
+    display: block;
+    font-family: "Public Sans";
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: var(--amarilo);
+    margin-bottom: 10px;
+    background: transparent;
+}
+
+.info-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--amarilo);
+    color: var(--bege);
+    font-style: italic;
+    font-size: 12px;
+    margin-left: 5px;
+    cursor: help;
+    vertical-align: middle;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.info-icon:hover {
+    transform: scale(1.15);
+    box-shadow: 0 0 8px rgba(255, 205, 93, 0.8);
+    background-color: #ffda85;
+    color: var(--bege);
+}
+
+.info-icon:hover::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgba(30, 30, 30, 0.95);
+    border: 1px solid var(--amarilo);
+    color: var(--white);
+    font-family: "Public Sans";
+    font-style: normal;
+    font-size: 12px;
+    text-align: center;
+    z-index: 10;
+    pointer-events: none;
+    opacity: 0;
+    animation: fadeIn 0.3s forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        bottom: calc(100% + 10px);
+    }
+}
+
+.input-wrapper {
+    display: flex;
+    align-items: center;
+    background: rgba(30, 30, 30, 0.6);
+    border: 2px solid var(--amarilo);
+    border-radius: 8px;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+}
+
+.input-wrapper:hover {
+    box-shadow: 0 0 8px rgba(255, 205, 93, 0.4);
+}
+
+.input-wrapper:focus-within {
+    box-shadow: 0 0 12px rgba(255, 205, 93, 0.7);
+    border-color: #ffda85;
+    background: rgba(40, 40, 40, 0.8);
+}
+
+.currency-symbol, .percent-symbol {
+    font-family: "Public Sans";
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--amarilo);
+    background: transparent;
+    transition: all 0.3s ease;
+}
+
+.input-wrapper:focus-within .currency-symbol,
+.input-wrapper:focus-within .percent-symbol {
+    color: #ffda85;
+}
+
+.percent-symbol {
+    margin-left: 5px;
+}
+
+.input-wrapper input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    padding: 10px;
+    color: var(--white);
+    font-family: "Public Sans";
+    font-size: 1.3rem;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.slider-container {
+    width: 100%;
+    margin-top: 5px;
+    background: transparent;
+    position: relative;
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 4px;
+    border-radius: 4px;
+    background: #444;
+    outline: none;
+    transition: all 0.1s;
+    cursor: pointer;
+    will-change: contents;
+}
+
+.slider:hover {
+    background: #555;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: transparent;
+    cursor: pointer;
+    opacity: 0;
+}
+
+.slider::-moz-range-thumb {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: transparent;
+    cursor: pointer;
+    opacity: 0;
+}
+
+.slider-thumb {
+    width: 24px;
+    height: 24px;
+    background-color: var(--amarilo);
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    pointer-events: none;
+    transition: all 0.1s ease;
+}
+
+.slider:hover + .slider-thumb,
+.slider:active + .slider-thumb {
+    width: 28px;
+    height: 28px;
+    box-shadow: 0 0 10px rgba(255, 205, 93, 0.6);
+}
+
+.period-options {
+    display: flex;
+    gap: 15px;
+    background: transparent;
+}
+
+.period-option {
+    flex: 1;
+    padding: 10px;
+    background: rgba(30, 30, 30, 0.6);
+    border: 2px solid var(--amarilo);
+    border-radius: 8px;
+    color: var(--white);
+    font-family: "Public Sans";
+    font-weight: 700;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.period-option:hover {
+    box-shadow: 0 0 10px rgba(255, 205, 93, 0.5);
+    background: rgba(50, 50, 50, 0.7);
+    transform: translateY(-2px);
+}
+
+.period-option:active {
+    transform: translateY(1px);
+}
+
+.period-option.active {
+    background: var(--amarilo);
+    color: var(--bege);
+    box-shadow: 0 0 15px rgba(255, 205, 93, 0.6);
+}
+
+.calculate-button, .recalculate-button {
+    width: 100%;
+    padding: 12px 0;
+    background: linear-gradient(to right, var(--wine), var(--amarilo));
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-family: "Public Sans";
+    font-weight: 700;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 20px;
+}
+
+.calculate-button:hover, .recalculate-button:hover {
+    box-shadow: 0 0 15px rgba(255, 205, 93, 0.8);
+}
+
+.result-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: transparent;
+}
+
+.total-amount {
+    text-align: center;
+    margin-bottom: 30px;
+    background: transparent;
+}
+
+.total-amount .amount {
+    display: block;
+    font-family: "Abril Fatface";
+    font-size: 2.8rem;
+    color: var(--amarilo);
+    background: transparent;
+}
+
+.total-amount .description {
+    display: block;
+    font-family: "Public Sans";
+    font-size: 1rem;
+    color: var(--white);
+    margin-top: 5px;
+    background: transparent;
+}
+
+.chart-container {
+    width: 220px;
+    height: 220px;
+    position: relative;
+    margin: 0 auto 30px;
+    background: transparent;
+}
+
+.donut-chart {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: conic-gradient(var(--wine) 0 95%, var(--amarilo) 95% 100%);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.chart-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 65%;
+    height: 65%;
+    background: var(--bege);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    box-sizing: border-box;
+    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.2);
+}
+
+.monthly-result {
+    font-family: "Abril Fatface";
+    font-size: 1.2rem;
+    color: var(--amarilo);
+    background: transparent;
+    text-align: center;
+    line-height: 1.2;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: geometricPrecision;
+    font-weight: normal;
+    text-shadow: 0 0 1px var(--amarilo);
+}
+
+.result-label {
+    font-family: "Public Sans";
+    font-size: 0.8rem;
+    color: var(--white);
+    margin-top: 3px;
+    background: transparent;
+    text-align: center;
+}
+
+.breakdown {
+    width: 100%;
+    margin-top: 20px;
+    background: transparent;
+}
+
+.breakdown-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    background: transparent;
+}
+
+.breakdown-color {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.breakdown-color.principal {
+    background: var(--wine);
+}
+
+.breakdown-color.interest {
+    background: var(--amarilo);
+}
+
+.breakdown-label {
+    flex: 1;
+    font-family: "Public Sans";
+    font-size: 1rem;
+    color: var(--white);
+    background: transparent;
+}
+
+.breakdown-value {
+    font-family: "Public Sans";
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--amarilo);
+    background: transparent;
+}
+
+/* Responsividade */
+@media (max-width: 900px) {
+    .calculator-wrapper {
+        flex-direction: column;
+    }
+    
+    .calculator-title h1 {
+        font-size: 2.8rem;
+    }
+}
+
+.toggle-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+    background: transparent;
+}
+
+.toggle-label {
+    font-family: "Public Sans";
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--white);
+    margin: 0 10px;
+    opacity: 0.7;
+    transition: all 0.3s ease;
+    background: transparent;
+}
+
+.toggle-label.active {
+    color: var(--amarilo);
+    opacity: 1;
+}
+
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 46px;
+    height: 24px;
+    background: transparent;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toggle-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(30, 30, 30, 0.6);
+    border: 2px solid var(--amarilo);
+    transition: 0.4s;
+    border-radius: 24px;
+}
+
+.toggle-slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 3px;
+    bottom: 2px;
+    background-color: var(--amarilo);
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+input:checked + .toggle-slider {
+    background-color: rgba(50, 50, 50, 0.8);
+}
+
+input:checked + .toggle-slider:before {
+    transform: translateX(21px);
+}
+
+input:focus + .toggle-slider {
+    box-shadow: 0 0 8px rgba(255, 205, 93, 0.6);
+}
+
+/* Otimização para renderização mais suave */
+.slider, .slider-thumb, .input-wrapper, .donut-chart {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+}
+
+.calculator-subtitle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 15px;
+    background: transparent;
+}
+
+.calc-type {
+    font-family: "Public Sans";
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--amarilo);
+    padding: 5px 12px;
+    border: 1px solid var(--amarilo);
+    border-radius: 4px;
+    background: rgba(30, 30, 30, 0.6);
+}
+
+.calculation-explanation {
+    margin-top: 30px;
+    padding: 20px;
+    background: rgba(30, 30, 30, 0.6);
+    border-radius: 8px;
+    border-left: 3px solid var(--amarilo);
+}
+
+.calculation-explanation h3 {
+    font-family: "Public Sans";
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--amarilo);
+    margin-bottom: 10px;
+    background: transparent;
+}
+
+.calculation-explanation p {
+    font-family: "Public Sans";
+    font-size: 0.9rem;
+    color: var(--white);
+    margin-bottom: 10px;
+    background: transparent;
+}
+
+.formula {
+    background: rgba(20, 20, 20, 0.5);
+    padding: 12px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.formula-text {
+    font-family: "Public Sans";
+    font-size: 1.1rem;
+    color: var(--white);
+    background: transparent;
+}
+
+.formula-text sup {
+    background: transparent;
+    color: var(--amarilo);
+    font-size: 0.8rem;
+}
+
+.formula-legend {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    background: transparent;
+}
+
+.formula-legend span {
+    font-family: "Public Sans";
+    font-size: 0.85rem;
+    color: var(--white);
+    background: transparent;
+}
+
+.formula-legend strong {
+    color: var(--amarilo);
+    background: transparent;
+}
+
+.share-container {
+    margin-top: 25px;
+    background: transparent;
+}
+
+.share-container h3 {
+    font-family: "Public Sans";
+    font-size: 1rem;
+    color: var(--amarilo);
+    margin-bottom: 15px;
+    text-align: center;
+    background: transparent;
+}
+
+.share-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    background: transparent;
+}
+
+.share-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    background: rgba(30, 30, 30, 0.8);
+    color: var(--white);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    font-family: "Public Sans";
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    height: 40px;
+    box-sizing: border-box;
+}
+
+.share-button svg {
+    fill: var(--white);
+    transition: all 0.3s ease;
+    background: transparent;
+    vertical-align: middle;
+    width: 24px;
+    height: 24px;
+    display: block;
+}
+
+.share-button.whatsapp svg {
+    position: relative;
+    top: 1px;
+}
+
+.share-button.whatsapp:hover {
+    background-color: #25D366;
+    color: #fff;
+}
+
+.share-button.pdf:hover {
+    background-color: #f44336;
+    color: #fff;
+}
+
+.share-button.copy-link:hover {
+    background-color: #6c757d;
+    color: #fff;
+}
+
+.share-button:hover svg {
+    fill: #fff;
+    transform: scale(1.1);
+}
+
+.copy-message {
+    text-align: center;
+    margin-top: 10px;
+    font-family: "Public Sans";
+    font-size: 0.8rem;
+    color: var(--amarilo);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    background: transparent;
+}
+
+.creator-text {
+    font-family: "Public Sans";
+    font-size: 0.6rem;
+    color: rgba(255, 255, 255, 0.3);
+    text-align: center;
+    margin-top: 5px;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    background: transparent;
+}
