@@ -15,11 +15,25 @@
 <body>
     <header>
         <nav class="main-lista">
+            <div class="navbar">
+                
             <ul class="nav-lista">
                 <li><a href="./index.html"><img class="piggybank-icon" src="./coisinhas/piggybank-icon.svg" alt="Icon porquinho de dinheiro"></a></li>
                 <div class="ancoras">
                     <li><a href="./index.html">Money Talks</a></li>
-                    <li><a href="./pasta/conteudo.html">Entendendo o que é investir</a></li>
+                    <li>
+                        <div class="dropdown">
+                            <button class="dropbtn" onclick="myFunction()">Entendendo o que é investir
+                                <i class="fa fa-caret-down"></i>
+                              </button>
+                            <div class="dropdown-content" id="myDropdown">
+                              <a href="./pasta/conteudo.html">- Por que Investir?</a>
+                              <a href="./pasta/conteudo.html">- 6 Passos Essenciais para Investir</a>
+                              <a href="./pasta/conteudo.html">- Erros Comuns de Iniciantes</a>
+                            </div>
+                            </div>
+                        </li>
+                    <li><a href="./pasta/conteudo.html"></a></li>
                     <li><a href="./pasta/calculadora.html">Calculadora</a></li>
                     <li><a href="./pasta/rendas.html">Rendas</a></li>
                     <li><a href="./pasta/faq.html">FAQ</a></li>
@@ -29,6 +43,7 @@
                     </div>
                 </div>
             </ul>
+            </div>
         </nav>
     </header>
 
@@ -89,6 +104,22 @@
             </div>
         </div>
     </main>
-
+    <script>
+        /* Quando o user clicar no button, ativa netre esconder e mostrar o cointeudo do dropdownWhen the user clicks on the button, 
+        toggle between hiding and showing the dropdown content */
+        function myFunction() {
+          document.getElementById("myDropdown").classList.toggle("show");
+        }
+        
+        // Fecha o dropdown se clicar fora
+        window.onclick = function(e) {
+          if (!e.target.matches('.dropbtn')) {
+          var myDropdown = document.getElementById("myDropdown");
+            if (myDropdown.classList.contains('show')) {
+              myDropdown.classList.remove('show');
+            }
+          }
+        }
+    </script>
 </body>
 </html>

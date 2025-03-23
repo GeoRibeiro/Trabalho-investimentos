@@ -15,20 +15,34 @@
 <body>
     <header>
         <nav class="main-lista">
+            <div class="navbar">
+                
             <ul class="nav-lista">
-                <li><a href="/index.html"><img class="piggybank-icon" src="/coisinhas/piggybank-icon.svg" alt="Icon porquinho de dinheiro"></a></li>
+                <li><a href="./index.html"><img class="piggybank-icon" src="./coisinhas/piggybank-icon.svg" alt="Icon porquinho de dinheiro"></a></li>
                 <div class="ancoras">
-                    <li><a href="/index.html">Money Talks</a></li>
-                    <li><a href="./conteudo.html">Entendendo o que é investir</a></li>
-                    <li><a href="./calculadora.html">Calculadora</a></li>
-                    <li><a href="./rendas.html">Rendas</a></li>
-                    <li><a href="./faq.html">FAQ</a></li>
-                    <div class="cadastrar">
-                        <li><a href="./login.html">Login</a></li>
-                        <li><a href="./cadastro.html">Cadastrar</a></li>
-                    </div>
+                    <li><a href="./index.html">Money Talks</a></li>
+                    <li>
+                        <div class="dropdown">
+                            <button class="dropbtn" onclick="myFunction()">Entendendo o que é investir
+                                <i class="fa fa-caret-down"></i>
+                              </button>
+                            <div class="dropdown-content" id="myDropdown">
+                              <a href="./conteudo.html">- Por que Investir?</a>
+                              <a href="./conteudo.html">- 6 Passos Essenciais para Investir</a>
+                              <a href="./conteudo.html">- Erros Comuns de Iniciantes</a>
+                            </div>
+                            </div>
+                        </li>
+                        <li><a href="./calculadora.html">Calculadora</a></li>
+                        <li><a href="./rendas.html">Rendas</a></li>
+                        <li><a href="./faq.html">FAQ</a></li>
+                        <div class="cadastrar">
+                            <li><a href="./login.html">Login</a></li>
+                            <li><a href="./cadastro.html">Cadastrar</a></li>
+                        </div>
                 </div>
             </ul>
+            </div>
         </nav>
     </header>
     

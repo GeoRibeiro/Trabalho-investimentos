@@ -440,7 +440,6 @@
     background: transparent;
 }
 
-/* Responsividade */
 @media (max-width: 900px) {
     .calculator-wrapper {
         flex-direction: column;
@@ -526,7 +525,6 @@ input:focus + .toggle-slider {
     box-shadow: 0 0 8px rgba(255, 205, 93, 0.6);
 }
 
-/* Otimização para renderização mais suave */
 .slider, .slider-thumb, .input-wrapper, .donut-chart {
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
