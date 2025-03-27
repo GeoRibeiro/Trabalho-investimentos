@@ -432,7 +432,7 @@
                        `- Valor final: ${valorFinal}\n` +
                        `- Valor investido: ${valorInvestido}\n` +
                        `- Rendimento: ${rendimento}\n\n` +
-                       `Faça sua simulação em: money-talks.com.br/calculadora`,
+                       `Faça sua simulação em: https://moneytalksinvestmentpage.vercel.app/pasta/calculadora.html`,
                     dados: {
                         valorInicial,
                         aporteMensal,
@@ -560,7 +560,7 @@
                     doc.setFontSize(10);
                     doc.setTextColor(255, 255, 255);
                     doc.text('Simulação gerada em ' + new Date().toLocaleDateString('pt-BR'), 20, 290);
-                    doc.text('money-talks.com.br/calculadora', 190, 290, {align: 'right'});
+                    doc.text('https://moneytalksinvestmentpage.vercel.app/pasta/calculadora.html', 190, 290, {align: 'right'});
                     
 
                     doc.save('simulacao-investimento.pdf');
