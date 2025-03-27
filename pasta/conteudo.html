@@ -19,7 +19,16 @@
                 <li><a href="/index.html"><img class="piggybank-icon" src="/coisinhas/piggybank-icon.svg" alt="Icon porquinho de dinheiro"></a></li>
                 <div class="ancoras">
                     <li><a href="/index.html">Money Talks</a></li>
-                    <li><a href="./conteudo.html">Entendendo o que é investir</a></li>
+                    <li>
+                        <div class="dropdown">
+                            <a href="#" class="dropbtn" onclick="myFunction(event)">Entendendo o que é investir</a>
+                            <div class="dropdown-content" id="myDropdown">
+                              <a href="./conteudo.html#porque-investir">- Por que Investir?</a>
+                              <a href="./conteudo.html#passos-essenciais">- 6 Passos Essenciais</a>
+                              <a href="./conteudo.html#erros-comuns">- Erros Comuns</a>
+                            </div>
+                        </div>
+                    </li>
                     <li><a href="./calculadora.html">Calculadora</a></li>
                     <li><a href="./rendas.html">Rendas</a></li>
                     <li><a href="./faq.html">FAQ</a></li>
@@ -34,12 +43,12 @@
     
     <main>
         <div class="all">
-            <div class="porque">
+            <div id="porque-investir" class="porque">
                 <h1>Por que Investir?</h1>
                 <p>O dinheiro é importante porque ajuda a alcançar seus objetivos e traz qualidade de vida. Para fazer isso, é essencial saber como usá-lo corretamente, e a chave é aprender a poupar. <br>
                 Poupar é o primeiro passo para investir. Mesmo com pouco dinheiro, como R$ 30, é possível começar a investir. Guardar dinheiro na conta sem investir não é eficiente, pois ele perde valor com a inflação. Investir é uma maneira de evitar isso e fazer o dinheiro crescer.</p>
             </div>
-            <div class="passos">
+            <div id="passos-essenciais" class="passos">
                 <h1>6 Passos Essenciais para Investir</h1>
         
                 <h3>1. Planejamento Financeiro</h3>
@@ -56,7 +65,7 @@
                         <li><strong>Moderado</strong>: Aceita algum risco para ter uma rentabilidade maior.</li>
                         <li><strong>Agressivo</strong>: Está disposto a assumir mais riscos para obter um retorno maior.</li>
                     </ul>
-                    <p>Para saber mais e descobrir seu tipo <a href="./rendas.html">clique aqui</a></p>
+                    <p>Se tiver mais perguntas entre no FAQ(Perguntas Frequentes) <a href="./rendas.html">clicando aqui</a></p>
                 </div>
             
                 <h3>4. Conheça os Principais Investimentos</h3>
@@ -69,7 +78,7 @@
                 <p>Investir é um processo a longo prazo. Tenha paciência, mantenha seu foco nos objetivos e evite tentar obter grandes retornos rapidamente.</p>
             </div>
 
-            <div class="erros">
+            <div id="erros-comuns" class="erros">
                 <h1><strong>Erros Comuns de Iniciantes</strong></h1>
                 <ul>
                     <li>Não se acomodar na poupança, que tem rendimento muito baixo.</li>
@@ -81,9 +90,13 @@
             </div>
             
             <div class="ultimo-p">
+                <div class="img-p">
+                    <img src="/coisinhas/rodadas-de-investimento-startup.jpg" alt="Criptmoedas e grafico">
+                </div>
                 <p>Investir de forma inteligente pode ajudar você a atingir seus objetivos financeiros. Comece devagar, entenda seu perfil e sempre busque aprender mais!</p>
             </div>
         </div>
     </main>
+    <script src="/dropdown.js"></script>
 </body>
 </html>

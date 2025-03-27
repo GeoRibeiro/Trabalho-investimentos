@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,7 +19,16 @@
                 <li><a href="/index.html"><img class="piggybank-icon" src="/coisinhas/piggybank-icon.svg" alt="Icon porquinho de dinheiro"></a></li>
                 <div class="ancoras">
                     <li><a href="/index.html">Money Talks</a></li>
-                    <li><a href="./conteudo.html">Entendendo o que é investir</a></li>
+                    <li>
+                        <div class="dropdown">
+                            <a href="#" class="dropbtn" onclick="myFunction(event)">Entendendo o que é investir</a>
+                            <div class="dropdown-content" id="myDropdown">
+                              <a href="./conteudo.html#porque-investir">- Por que Investir?</a>
+                              <a href="./conteudo.html#passos-essenciais">- 6 Passos Essenciais</a>
+                              <a href="./conteudo.html#erros-comuns">- Erros Comuns</a>
+                            </div>
+                        </div>
+                    </li>
                     <li><a href="./calculadora.html">Calculadora</a></li>
                     <li><a href="./rendas.html">Rendas</a></li>
                     <li><a href="./faq.html">FAQ</a></li>
@@ -31,6 +40,6 @@
             </ul>
         </nav>
     </header>
-    
+    <script src="/dropdown.js"></script>
 </body>
 </html>

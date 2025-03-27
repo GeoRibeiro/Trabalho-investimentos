@@ -15,25 +15,20 @@
 <body>
     <header>
         <nav class="main-lista">
-            <div class="navbar">
-                
             <ul class="nav-lista">
                 <li><a href="./index.html"><img class="piggybank-icon" src="./coisinhas/piggybank-icon.svg" alt="Icon porquinho de dinheiro"></a></li>
                 <div class="ancoras">
                     <li><a href="./index.html">Money Talks</a></li>
                     <li>
                         <div class="dropdown">
-                            <button class="dropbtn" onclick="myFunction()">Entendendo o que é investir
-                                <i class="fa fa-caret-down"></i>
-                              </button>
+                            <a href="#" class="dropbtn" onclick="myFunction(event)">Entendendo o que é investir</a>
                             <div class="dropdown-content" id="myDropdown">
-                              <a href="./pasta/conteudo.html">- Por que Investir?</a>
-                              <a href="./pasta/conteudo.html">- 6 Passos Essenciais para Investir</a>
-                              <a href="./pasta/conteudo.html">- Erros Comuns de Iniciantes</a>
+                              <a href="./pasta/conteudo.html#porque-investir">- Por que Investir?</a>
+                              <a href="./pasta/conteudo.html#passos-essenciais">- 6 Passos Essenciais</a>
+                              <a href="./pasta/conteudo.html#erros-comuns">- Erros Comuns</a>
                             </div>
-                            </div>
-                        </li>
-                    <li><a href="./pasta/conteudo.html"></a></li>
+                        </div>
+                    </li>
                     <li><a href="./pasta/calculadora.html">Calculadora</a></li>
                     <li><a href="./pasta/rendas.html">Rendas</a></li>
                     <li><a href="./pasta/faq.html">FAQ</a></li>
@@ -41,13 +36,12 @@
                         <li><a href="./pasta/login.html">Login</a></li>
                         <li><a href="./pasta/cadastro.html">Cadastrar</a></li>
                     </div>
-                </div>
             </ul>
             </div>
         </nav>
     </header>
 
-
+<script src=""></script>
 
     <main>
         <div class="h1-pig">
@@ -104,22 +98,6 @@
             </div>
         </div>
     </main>
-    <script>
-        /* Quando o user clicar no button, ativa netre esconder e mostrar o cointeudo do dropdownWhen the user clicks on the button, 
-        toggle between hiding and showing the dropdown content */
-        function myFunction() {
-          document.getElementById("myDropdown").classList.toggle("show");
-        }
-        
-        // Fecha o dropdown se clicar fora
-        window.onclick = function(e) {
-          if (!e.target.matches('.dropbtn')) {
-          var myDropdown = document.getElementById("myDropdown");
-            if (myDropdown.classList.contains('show')) {
-              myDropdown.classList.remove('show');
-            }
-          }
-        }
-    </script>
+    <script src="dropdown.js"></script>
 </body>
 </html>

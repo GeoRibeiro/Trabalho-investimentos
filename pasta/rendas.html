@@ -19,7 +19,16 @@
                 <li><a href="/index.html"><img class="piggybank-icon" src="/coisinhas/piggybank-icon.svg" alt="Icon porquinho de dinheiro"></a></li>
                 <div class="ancoras">
                     <li><a href="/index.html">Money Talks</a></li>
-                    <li><a href="./conteudo.html">Entendendo o que é investir</a></li>
+                    <li>
+                        <div class="dropdown">
+                            <a href="#" class="dropbtn" onclick="myFunction(event)">Entendendo o que é investir</a>
+                            <div class="dropdown-content" id="myDropdown">
+                              <a href="./conteudo.html#porque-investir">- Por que Investir?</a>
+                              <a href="./conteudo.html#passos-essenciais">- 6 Passos Essenciais</a>
+                              <a href="./conteudo.html#erros-comuns">- Erros Comuns</a>
+                            </div>
+                        </div>
+                    </li>
                     <li><a href="./calculadora.html">Calculadora</a></li>
                     <li><a href="./rendas.html">Rendas</a></li>
                     <li><a href="/pasta/faq.html">FAQ</a></li>
@@ -57,15 +66,25 @@
                 <li><strong>Fundos Imobiliários (FIIs):</strong> Investimentos em imóveis que podem gerar renda de aluguel.</li>
             </ul>
         </div>
+        <h3 id="h3">Resumindo isto, nesta imagem é as principais diferenças</h3>
+        <div class="img">
+        <img id="imagem" src="/coisinhas/VS.png" alt="Comparação entre renda fixa e renda variavel">
+        </div>
+      
+        <h1>Análise com gráfico</h1>
+        <p>Analisamos os anos de 1995 a 2009, imaginando uma pessoa que investiu R$ 100.000,00 em ações (renda variável), em renda fixa e em uma carteira balanceada (renda variável e fixa). Em 2003, observou-se o PIOR ano para quem investiu apenas em renda variável. Isso faz sentido, pois vivemos uma grande incerteza econômica devido à eleição, e a bolsa havia caído bastante. Como teríamos comprado "barato", o investimento em renda variável teria superado. Isso se aplica apenas para quem começou a investir nesse ano. Veja o gráfico:</p>
+        <div class="img">
+            <img id="outraimg" src="/coisinhas/graficozin.jpg" alt="Grafico sobre renda fixa, renda variavel e carteira balanceada">
+        </div>
+        <p>De qualquer maneira, é muito evidente a redução da volatilidade (e do risco) para quem investiu na carteira balanceada. Interessante também notar que a diferença não foi tão grande, de R$ 659 mil para R$ 625 mil (da renda variável para a carteira balanceada). Mas, em relação à renda fixa, a diferença foi enorme: de R$ 625 mil para R$ 422 mil em renda fixa. Este estudo teve como objetivo mostrar as diferenças entre os tipos de investimento, para que você possa escolher a melhor opção.</p>
         
-        <img src="/coisinhas/vs.svg" alt="">
-        
+        <div class="divers">
+            <h2>Diversificação é a Chave</h2>
+            <p>A melhor estratégia para começar a investir é diversificar. Isso significa investir tanto em renda fixa quanto em renda variável, para equilibrar os riscos e maximizar as chances de sucesso.</p>
+    </div>
 
-        <h2>Diversificação é a Chave</h2>
-        <p>A melhor estratégia para começar a investir é diversificar. Isso significa investir tanto em renda fixa quanto em renda variável, para equilibrar os riscos e maximizar as chances de sucesso.</p>
 
     </main>
-
-
+    <script src="/dropdown.js"></script>
 </body>
 </html>

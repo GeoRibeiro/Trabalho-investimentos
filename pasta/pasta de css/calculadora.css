@@ -302,10 +302,44 @@
     cursor: pointer;
     transition: all 0.3s;
     margin-top: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.calculate-button::before, .recalculate-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0),
+        rgba(255, 255, 255, 0.3),
+        rgba(255, 255, 255, 0)
+    );
+    transform: skewX(-25deg);
+    pointer-events: none;
 }
 
 .calculate-button:hover, .recalculate-button:hover {
     box-shadow: 0 0 15px rgba(255, 205, 93, 0.8);
+    background: linear-gradient(to right, #a50d03, #ffe07d);
+    transform: scale(1.03);
+}
+
+.calculate-button:hover::before, .recalculate-button:hover::before {
+    animation: shine 1.5s infinite;
+}
+
+@keyframes shine {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 200%;
+    }
 }
 
 .result-display {
@@ -653,6 +687,25 @@ input:focus + .toggle-slider {
     transition: all 0.3s ease;
     height: 40px;
     box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+}
+
+.share-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0),
+        rgba(255, 255, 255, 0.3),
+        rgba(255, 255, 255, 0)
+    );
+    transform: skewX(-25deg);
+    pointer-events: none;
 }
 
 .share-button svg {
@@ -673,21 +726,28 @@ input:focus + .toggle-slider {
 .share-button.whatsapp:hover {
     background-color: #25D366;
     color: #fff;
+    transform: scale(1.03);
 }
 
 .share-button.pdf:hover {
     background-color: #f44336;
     color: #fff;
+    transform: scale(1.03);
 }
 
 .share-button.copy-link:hover {
     background-color: #6c757d;
     color: #fff;
+    transform: scale(1.03);
 }
 
 .share-button:hover svg {
     fill: #fff;
     transform: scale(1.1);
+}
+
+.share-button:hover::before {
+    animation: shine 1.5s infinite;
 }
 
 .copy-message {

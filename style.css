@@ -10,7 +10,7 @@ main{
 }
 
 .descricao p{
-    margin: 2.375rem 4.75rem;
+    margin: 2.375rem 1.75rem;
     text-align: left;
     font-family: "Public Sans";
     font-size: 1.5rem;
@@ -20,6 +20,11 @@ main{
     display: flex;
 }
 
+.h1-pig h1{
+    font-weight: bold;
+    font-style: italic;
+}
+
 h1{
     font-size: 5rem;
     font-family: "Abril Fatface";
@@ -27,7 +32,7 @@ h1{
 
 .segunda-parte{
     gap: 6.063rem;
-    margin-block: 17.563rem 9.813rem;
+    margin-block: 7.563rem 9.813rem;
 }
 
 .h1-desc{
@@ -50,8 +55,8 @@ h1{
     font-size: 1.5rem;
 }
 
-.terceira-parte h1{
-    color: var(--new-amarilo);
+.terceira-parte h1, .segunda-parte h1{
+    color: var(--amarilo);
 }
 
 .terceira-parte{
